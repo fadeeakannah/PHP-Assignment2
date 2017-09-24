@@ -74,7 +74,9 @@
     <div id="outer">  
 
         <p>Thank you <?php echo $_POST['fname']?> <?php echo $_POST['lname']?> for sending a donation of $<?php echo number_format((float)$_POST['amount'], 2, '.', ''); ?>!
-            <?php  
+            <?php 
+            //Free gifts will not show when checkbox is checked.
+            //Free gift will appear when check box not checked.
                 if(!isset($_POST['gift'])) {
                     switch ($_POST['amount']) {
                         case '20':
@@ -91,9 +93,10 @@
                             break;
                     }
                 }
-            ?> </p>
+            ?> 
+        </p>
     
-        <p>Your tax deductible receipt is #<?php echo substr($_POST['lname'],-6,-5) ,strtoupper ("") ;?><?php echo mt_rand(1000, 9999);?> which will be sent to <?php echo $_POST['email'] ?></p> 
+        <p>Your tax deductible receipt is #<?php echo substr($_POST['lname'],-6,-5) ,strtoupper ("") ;?><?php echo mt_rand(1000, 9999);?> which will be sent to <?php echo $_POST['email'] ?>.</p> 
  
         
     </div>

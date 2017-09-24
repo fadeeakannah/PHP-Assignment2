@@ -11,11 +11,13 @@
     $amount = "";
     $gift = "";
 
-    if($_POST) 
-    {
 
+    //post method
+    if($_POST) {
+
+        $errors = array();
         // not empty and correct email format
-        $errors = array();  
+         
         if (isset($_POST['fname'])) {
             $_POST['fname'] = trim($_POST['fname']);
         }
@@ -25,13 +27,14 @@
         if (isset($_POST['email'])) {
             $_POST['email'] = trim($_POST['email']);
         }
+        
+            
+        
         //start validation
         if(empty($_POST['fname']))
         {
             $errors['fname'] = "Your first name cannot be empty";
         }
-
-
 
         if(empty($_POST['lname']))
         {
@@ -47,13 +50,9 @@
             $errors['email2'] = "Invalid email format";
         }
 
-
-
         if(empty($_POST['amount'])) {
             $errors['amount'] = "Please select a donation amount";
         }      
-
-
 
         //check errors
         if(count($errors) == 0) 
@@ -66,11 +65,7 @@
             $errors = Array();
         }
     
-    
-    
     }
-
- 
 
 ?>
 
