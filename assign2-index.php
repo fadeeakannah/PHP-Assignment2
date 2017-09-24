@@ -3,6 +3,7 @@
 <?php
 
     $success = false;
+
     //variables set to empty values
     $fname  = "";
     $lname = "";
@@ -10,15 +11,20 @@
     $amount = "";
     $gift = "";
 
-
-
     if($_POST) 
     {
 
         // not empty and correct email format
         $errors = array();  
-
-
+        if (isset($_POST['fname'])) {
+            $_POST['fname'] = trim($_POST['fname']);
+        }
+        if (isset($_POST['lname'])) {
+            $_POST['lname'] = trim($_POST['lname']);
+        }
+        if (isset($_POST['email'])) {
+            $_POST['email'] = trim($_POST['email']);
+        }
         //start validation
         if(empty($_POST['fname']))
         {
@@ -30,10 +36,7 @@
         if(empty($_POST['lname']))
         {
             $errors['lname'] = "Your last name cannot be empty";
-        }    
-
-
-
+        }
 
         if(empty($_POST['email'])) 
         {
@@ -62,8 +65,12 @@
             $_POST = Array();
             $errors = Array();
         }
-   }
+    
+    
+    
+    }
 
+ 
 
 ?>
 
@@ -140,7 +147,7 @@
     </style>
 
 <body>
-
+    
     <?php 
         if ($success) {
             include("./assign2-output.php");
@@ -148,6 +155,7 @@
             include("./assign2-form.php");
         }
     ?>
+    
 </body>
 </head>
 </html>
