@@ -1,47 +1,5 @@
 <!--Fadeea Kannah-->
 
-
-<?php
-    
-    //variables set to empty values
-    
-    $fname  = "";
-    $lname = "";
-    $email = "";
-    $amount = "";
-    $gift = "";
-
-   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        
-    
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $email = $_POST['email'];
-    $amount = $_POST['amount'];
-    $gift = $_POST['gift'];
-
-   }
-          
-  
-
-/*POST method*/
-    
-     $fname = filter_input(INPUT_POST,'fname');
-     $lname = filter_input(INPUT_POST,'lname');
-     $email = filter_input(INPUT_POST,'email');
-
-     //Radiobuttons 
-     $amount = filter_input(INPUT_POST,'amount');
-     if ($amount == NULL) {
-         $amount = 'unknown';
-     }
-     //gift
-     $gift = filter_input(INPUT_POST,'gift');  
- 
-    
-?>
-
-
 <!DOCTYPE html>
 
 <html>
@@ -115,10 +73,28 @@
     
     <div id="outer">  
 
-        <p>Thank you <?php echo $_POST['fname']?> <?php echo $_POST['lname']?> for sending a donation of 
-        <?php echo ("$" . $_POST['amount']) ?>!</p>
+        <p>Thank you <?php echo $_POST['fname']?> <?php echo $_POST['lname']?> for sending a donation of $<?php echo number_format((float)$_POST['amount'], 2, '.', ''); ?>!
+            <?php  
+                if(!isset($_POST['gift'])) {
+                    switch ($_POST['amount']) {
+                        case '20':
+                             echo 'We will send your free pen.';
+                            break;
+                        case '40':
+                             echo 'We will send your free mug.';
+                            break;
+                        case '60':
+                             echo  'We will send your free t-shirt.';
+                            break;
+                        case '100':
+                             echo  'We will send your free back pack.';
+                            break;
+                    }
+                }
+            ?> </p>
     
-        <p>Your tax deductible receipt is #<?php echo substr("$lname",-6,-5) ,strtoupper ("") ;?><?php echo mt_rand(1000, 9999);?> which will be sent to <?php echo $_POST['email'] ?></p> 
+        <p>Your tax deductible receipt is #<?php echo substr($_POST['lname'],-6,-5) ,strtoupper ("") ;?><?php echo mt_rand(1000, 9999);?> which will be sent to <?php echo $_POST['email'] ?></p> 
+ 
         
     </div>
 
