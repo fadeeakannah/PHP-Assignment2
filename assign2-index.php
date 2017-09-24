@@ -55,7 +55,7 @@
         }      
 
         //check errors
-        if(count($errors) == 0) 
+        if(count($errors) == 0 && isset($_POST['submit']))
         {
             $success= true;
         }
